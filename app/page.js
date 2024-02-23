@@ -6,7 +6,7 @@ const App =  () => {
   let nav = useRouter();
   
   useEffect(()=>{
-    nav.replace("1");
+    nav.replace("/page1");
   },[])
   return (
     <>

@@ -1,41 +1,38 @@
 "use client";
 import React, { useEffect, useState } from 'react'
 import Card from '../Card/Card'
-// import { usePathname, useSearchParams } from 'next/navigation'
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation';
+import {Button} from "@nextui-org/react";
+
 
 
 const ProductCart = ({ allData }) => {
+
+  // get URL Path Name
   let pathName = usePathname();
-  const [num , setNum] = useState(+ pathName.slice(-1))
-  const [current, setCurrent] = useState(20 * num);
-  const [first, setFirst] = useState(current - 20)
+
+  // Get Navigation Hooks 
   const nav = useRouter();
-  const more = () => {
+
+  // Get Num Of Page 
+  const [num , setNum] = useState(+ pathName.slice(-1))
+  const [current, setCurrent] = useState(10 * num);
+  const [first, setFirst] = useState(current - 10)
+
+
+  // Products Forward Function 
+  const ProductsForward = () => {
     if (current < allData.length) {
-      // setNum(num + 1);
-      setFirst(first * num);
-      setCurrent(current * num);
-        nav.replace(`${num + 1}`);
-      // localStorage.setItem("first", first);
-      // localStorage.setItem("current", current);
-      console.log(first)
-      console.log(current)
-    }
-    // nav.fastRefresh()
-    // console.log(nav)
-    // setTimeout(() => {
-    // }, 1000)
-
+      nav.replace(`Page${num + 1}`);   
+    } 
   }
-
-  // useEffect(()=>{
-
-  //   if(first === 0 && localStorage.getItem("first")){
-  //     setFirst(localStorage.getItem("first"))
-  //   }
-
-  // },[])
+  
+  // Products Back Function 
+  const ProductsBack = () => {
+    if(num !== 1){
+      nav.replace(`Page${num - 1}`);   
+    }
+  }
 
   return <>
     <div className="container">
@@ -54,11 +51,50 @@ const ProductCart = ({ allData }) => {
         )}
       </div>
       {/* Card  */}
-      {/* BtnMore  */}
-      <div className="btn-more my-5">
-        <button onClick={() => { more() }} className='border-1 border-[#f00]'>More</button>
+      {/* Btns  */}
+      <div className="btn w-[60%] mx-auto my-10 flex justify-center items-center">
+      <div className="parent  flex w-full justify-between items-center">
+      {/* BtnForward  */}
+      <div className="btn-forward my-5">
+        {current === allData.length?
+        <Button isDisabled color="primary">
+        Forward
+      </Button>        
+        :
+            <Button onClick={() => { ProductsForward() }} color="primary">
+            Forward
+          </Button>
+        }
       </div>
-      {/* BtnMore  */}
+      {/* BtnForward  */}
+      {/* BtnBack  */}
+      <div className="btn-back my-5">
+        {/* {!last? */}
+        {num === 1 ?
+        
+        <Button isDisabled color="primary">
+          Back
+      </Button>        
+        
+        :
+        
+            <Button onClick={() => {ProductsBack() }} color="primary">
+            Back
+          </Button>
+        
+        }
+        {/* : */}
+        {/* } */}
+      </div>
+      {/* BtnBack  */}
+
+
+
+      </div>
+
+      
+      </div>
+      {/* Btns  */}
     </div>
 
 
