@@ -3,7 +3,6 @@ import React from "react";
 import { Input } from "@nextui-org/react";
 
 export default function LoginPage() {
-  const sizes = ["sm", "md", "lg"];
   return (
     <>
       <section className="login-page py-20">
