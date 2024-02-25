@@ -33,11 +33,24 @@ const ProductCart = ({ allData }) => {
       nav.replace(`Page${num - 1}`);   
     }
   }
+  
+  
+  useEffect(()=>{
+    console.log()
+    // uf(nav.)
+    if(pathName.slice(0 , pathName.length - 1) !== "/page"){
+      
+      nav.replace(`/`);   
+    }
+
+
+},[])
+
 
   return <>
     <div className="container">
       <div className="title mb-8">
-        <h2 className="text-center text-3xl font-semibold lett">Popular Products</h2>
+        <h2 className="text-center text-3xl font-semibold">Popular Products</h2>
       </div>
       {/* Card  */}
       <div className="parent grid  grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-4 ">

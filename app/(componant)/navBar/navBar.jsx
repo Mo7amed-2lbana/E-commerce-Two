@@ -1,33 +1,30 @@
 "use client";
 import Link from "next/link";
-import React, { useLayoutEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IoSearchOutline } from "react-icons/io5";
 import "./navbarStyle.module.css";
 const NavBar = () => {
-  let userData = true;
+  let userData = false;
   const [makeScroll, setMakeScroll] = useState(false);
 
-  useLayoutEffect(() => {
-    window.addEventListener =
-      ("scroll",
-      () => {
-        let lastPosition = 0;
-        let current = Math.trunc(window.scrollY, 3);
-        if (window.scrollY > 200 && lastPosition < current) {
+    useEffect(()=>{
+
+      window.onscroll = ()=> {
+
+        if(window.scrollY > 100){
           setMakeScroll(true);
-        } else {
+        }else{
           setMakeScroll(false);
         }
-      });
-  }, []);
+      }
+
+    },[])
 
   return (
     <>
       {/* start navbar  */}
       <nav
-        className={`py-5  ${
-          makeScroll ? " sticky " : "relative "
-        } top-0 z-50 shadow-lg  transition-all bg-white`}
+        className={`py-5 ${ makeScroll ? "sticky" : "relative"} top-0 z-50 shadow-lg  transition-all bg-white`}
       >
         <div className="container">
           <div className="parent grid grid-cols-8 items-center ">
@@ -77,8 +74,8 @@ const NavBar = () => {
                 </>
               ) : (
                 <>
-                  <Link href="/login">Login</Link>
-                  <Link href="/register">Register</Link>
+                  <Link href="/auth/login">Login</Link>
+                  <Link href="/auth/register">Register</Link>
                 </>
               )}
             </ul>
