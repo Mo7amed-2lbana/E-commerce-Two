@@ -3,10 +3,10 @@ import HomeSlider from '../(componant)/HomeSlider/HomeSlider';
 import ProductCart from '../(componant)/ProductCart/ProductCart';
 // import { useNavigation } from 'next/navigation';
 
-const HomePage = async () => {
+const HomePage = async ({params}) => {
     // git Base URL
     const baseURL = process.env.BASE_URL;
-  
+
     // git Products Data form API
     const getAllProducts = async () => {
       const response = await fetch(`${baseURL}/api/v1/products`, {
@@ -17,12 +17,9 @@ const HomePage = async () => {
       const allData = await response.json();
       return allData.data;
     };
+
+    // All products data
     const allData = await getAllProducts();
-  
-  
-    // const nav = useNavigation;
-  
-  
   
     return (
       <>
@@ -32,7 +29,10 @@ const HomePage = async () => {
               <HomeSlider />
             </div>
           {/* silder  */}
+
+          {/* Product details Cart  */}
           <ProductCart allData={allData}/>
+          {/* Product details Cart  */}
         </section>
       </>
     );

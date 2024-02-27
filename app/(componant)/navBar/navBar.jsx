@@ -1,30 +1,28 @@
 "use client";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { IoSearchOutline } from "react-icons/io5";
 import "./navbarStyle.module.css";
 const NavBar = () => {
   let userData = false;
   const [makeScroll, setMakeScroll] = useState(false);
 
-    useEffect(()=>{
+  useEffect(() => {
+    // Last scroll postion
+    let lastPostion = 0;
+    window.onscroll = () => {
+      window.scrollY > 50 && lastPostion > window.scrollY ? setMakeScroll(true) : setMakeScroll(false);
 
-      window.onscroll = ()=> {
+      lastPostion = window.scrollY;
+    }
 
-        if(window.scrollY > 100){
-          setMakeScroll(true);
-        }else{
-          setMakeScroll(false);
-        }
-      }
-
-    },[])
+  }, [])
 
   return (
     <>
       {/* start navbar  */}
       <nav
-        className={`py-5 ${ makeScroll ? "sticky" : "relative"} top-0 z-50 shadow-lg  transition-all bg-white`}
+        className={`py-5 ${makeScroll ? "sticky" : "relative"} top-0 z-50 shadow-lg  transition-all bg-white`}
       >
         <div className="container">
           <div className="parent grid grid-cols-8 items-center ">

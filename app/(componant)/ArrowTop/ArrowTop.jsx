@@ -3,8 +3,8 @@ import React, { useEffect, useLayoutEffect, useState } from "react";
 import { IoIosArrowUp } from "react-icons/io";
 
 const ArrowTop = () => {
-  // to show arrow top icon
-  const [scrollToDown, setScrollToDown] = useState(false);
+
+  const [arrow, setArrow] = useState(false);
 
   //  to make scroll to top
   const scrollToTop = () => {
@@ -14,22 +14,28 @@ const ArrowTop = () => {
     });
   };
 
-  useLayoutEffect(() => {
-    window.onscroll = () => {
-      window.scrollY > 200 ? setScrollToDown(true) : setScrollToDown(false);
-    };
-  }, []);
+  console.log(window.scrollY)
+
+window.addEventListener("scroll" , ()=>{
+  if(window.scrollY > 300){
+    setArrow(true);
+  }else{
+    setArrow(false);
+
+  }
+})
 
   return (
     <>
+    {arrow ?
       <div
         onClick={scrollToTop}
-        className={`arrow-top ${
-          scrollToDown ? " flex " : " hidden "
-        }  fixed end-[25px] border-1 p-2 rounded-[50%] bottom-[25px] z-48 bg-white justifay-between items-center`}
+        className={`arrow-top  fixed end-[25px] border-1 p-2 rounded-[50%] bottom-[25px] z-48 bg-white justifay-between items-center`}
       >
         <IoIosArrowUp size={30} color="#333" />
       </div>
+    
+    :""}
     </>
   );
 };

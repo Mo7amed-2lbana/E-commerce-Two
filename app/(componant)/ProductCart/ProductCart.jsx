@@ -36,8 +36,7 @@ const ProductCart = ({ allData }) => {
   
   
   useEffect(()=>{
-    console.log()
-    // uf(nav.)
+
     if(pathName.slice(0 , pathName.length - 1) !== "/page"){
       
       nav.replace(`/`);   
